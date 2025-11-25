@@ -14,7 +14,7 @@ export const Forgot = () => {
         fetchDataBackend(url,data,'POST')*/
     
     const sendMail = async (data) => {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/recuperarpassword`;
+    const url = `${import.meta.env.VITE_FRONTEND_URL}/recuperarpassword`;
     try {
         await fetchDataBackend(url, data, 'POST');
         // Aquí puedes mostrar un toast de éxito
