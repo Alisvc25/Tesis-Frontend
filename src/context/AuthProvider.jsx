@@ -1,29 +1,56 @@
 import { useState, useEffect } from "react";
-import { AuthContext } from "./AuthContext";
+import AuthContext from "./AuthContext.jsx";
+import axios from "axios";
 
-export default function AuthProvider({ children }) {
-    const [usuario, setUsuario] = useState(null);
-    const [cargando, setCargando] = useState(true);
+export function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
+    // Cargar token desde localStorage
     useEffect(() => {
-        const data = localStorage.getItem("usuario");
-        if (data) setUsuario(JSON.parse(data));
-        setCargando(false);
+        const savedUser = localStorage.getItem("userData");
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+        }
+        setLoading(false);
     }, []);
 
-    const login = (userData) => {
-        setUsuario(userData);
-        localStorage.setItem("usuario", JSON.stringify(userData));
+    // ------------------ LOGIN ------------------
+    const login = async (email, password) => {
+        try {
+            const res = await axios.post("http://localhost:4000/api/auth/login", {
+                email,
+                password,
+            });
+
+            const userData = {
+                token: res.data.token,
+                role: res.data.role,
+                name: res.data.name,
+                id: res.data.id,
+            };
+
+            localStorage.setItem("userData", JSON.stringify(userData));
+            setUser(userData);
+
+            return { ok: true };
+        } catch (error) {
+            return { ok: false, msg: error.response?.data?.msg || "Error al iniciar sesión" };
+        }
     };
 
+    // ------------------ LOGOUT ------------------
     const logout = () => {
-        setUsuario(null);
-        localStorage.removeItem("usuario");
+        localStorage.removeItem("userData");
+        setUser(null);
     };
 
-    return (
-        <AuthContext.Provider value={{ usuario, cargando, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    const value = {
+        user,
+        loading,
+        login,
+        logout,
+    };
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -1,10 +1,20 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL,
-});
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-export default {
-    registrarDocente: (data) => api.post("/api/registroDocente", data),
-    registrarEstudiante: (data) => api.post("/api/registroEstudiante", data),
+export const adminApi = {
+    registrarDocente: async (data) => {
+        const res = await axios.post(`${API_URL}/registroDocente`, data);
+        return res.data;
+    },
+    registrarEstudiante: async (data) => {
+        const res = await axios.post(`${API_URL}/registroEstudiante`, data);
+        return res.data;
+    },
+    actualizarPassword: async (id, data, token) => {
+        const res = await axios.put(`${API_URL}/administrador/actualizarpassword/${id}`, data, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return res.data;
+    },
 };

@@ -1,22 +1,13 @@
-import Navbar from "../components/ui/Navbar";
-import Sidebar from "../components/ui/Sidebar";
-import { Outlet } from "react-router-dom";
+import Navbar from "../components/ui/Navbar.jsx";
+import Sidebar from "../components/ui/Sidebar.jsx";
 
-export default function DocenteLayout() {
-
-    const menu = [
-        { label: "Panel", to: "/docente" },
-        { label: "Registrar Calificación", to: "/docente/calificar" },
-    ];
-
+export default function DocenteLayout({ children }) {
     return (
-        <div className="flex">
-            <Sidebar menu={menu} />
-            <div className="flex-1 min-h-screen bg-[#F4F6F9]">
-                <Navbar />
-                <div className="p-6">
-                    <Outlet />
-                </div>
+        <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <div className="flex flex-1">
+                <Sidebar />
+                <main className="flex-1 p-6 bg-gray-50">{children}</main>
             </div>
         </div>
     );

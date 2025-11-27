@@ -1,11 +1,15 @@
 import { Navigate } from "react-router-dom";
+import useAuth from "../context/useAuth.jsx";
 
-export default function AdminRoute({ children }) {
-    const rol = localStorage.getItem("rol");
-    const token = localStorage.getItem("token");
+export default function DocenteRoute({ children }) {
+    const { user } = useAuth();
 
-    if (!token || rol !== "docente") {
-        return <Navigate to="/login" />;
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
+
+    if (user.role !== "docente") {
+        return <Navigate to="/" replace />;
     }
 
     return children;
