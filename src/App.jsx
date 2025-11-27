@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Informacion from "./pages/Informacion.jsx";
-
+import RegistrarAdmin from "./pages/RegistrarAdmin.jsx";
 
 // Dashboards
 import AdminDashboard from "./pages/AdminDashboard.jsx";
@@ -22,19 +22,15 @@ import EstudianteLayout from "./layout/EstudianteLayout.jsx";
 function App() {
   return (
     <Routes>
-
-      {/* Home */}
+      {/* Páginas públicas */}
       <Route path="/" element={<Home />} />
-
-      {/* Login */}
       <Route path="/login" element={<Login />} />
-      {/* Información */}
       <Route path="/informacion" element={<Informacion />} />
-
+      <Route path="/registro" element={<RegistrarAdmin />} />
 
       {/* ADMIN */}
       <Route
-        path="/admin"
+        path="/admin/*"
         element={
           <ProtectedRoute role="admin">
             <AdminLayout>
@@ -46,7 +42,7 @@ function App() {
 
       {/* DOCENTE */}
       <Route
-        path="/docente"
+        path="/docente/*"
         element={
           <ProtectedRoute role="docente">
             <DocenteLayout>
@@ -58,16 +54,15 @@ function App() {
 
       {/* ESTUDIANTE */}
       <Route
-        path="/estudiante"
+        path="/estudiante/*"
         element={
           <ProtectedRoute role="estudiante">
-          <EstudianteLayout>
-            <EstudianteDashboard />
-          </EstudianteLayout>
-        </ProtectedRoute>
+            <EstudianteLayout>
+              <EstudianteDashboard />
+            </EstudianteLayout>
+          </ProtectedRoute>
         }
       />
-
     </Routes>
   );
 }
