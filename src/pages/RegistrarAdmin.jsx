@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { adminApi } from "../api/adminApi.js";
 import Loader from "../components/ui/Loader.jsx";
 import ErrorAlert from "../components/ui/ErrorAlert.jsx";
 
@@ -8,14 +8,15 @@ export default function RegistrarAdmin() {
     const navigate = useNavigate();
 
     const [nombre, setNombre] = useState("");
+    const [apellido, setApellido] = useState("");
+    const [direccion, setDireccion] = useState("");
+    const [celular, setCelular] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-
-    const API_URL = import.meta.env.VITE_BACKEND_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,11 +31,12 @@ export default function RegistrarAdmin() {
         setLoading(true);
 
         try {
-            await axios.post(`${API_URL}/registro`, { nombre, email, password });
+            const payload = { nombre, apellido, direccion, celular, email, password };
+            await adminApi.registrarAdmin(payload);
             setSuccess("Administrador registrado correctamente");
             setTimeout(() => {
-                navigate("/login");
-            }, 2000);
+                navigate("/login?role=administrador");
+            }, 1500);
         } catch (err) {
             setError(err.response?.data?.msg || "Error al registrar");
         } finally {
@@ -51,48 +53,83 @@ export default function RegistrarAdmin() {
                 {success && <p className="text-green-600 mb-4 text-center">{success}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="form-label">Nombre</label>
+                            <input
+                                type="text"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                                required
+                                className="form-input"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="form-label">Apellido</label>
+                            <input
+                                type="text"
+                                value={apellido}
+                                onChange={(e) => setApellido(e.target.value)}
+                                required
+                                className="form-input"
+                            />
+                        </div>
+                    </div>
+
                     <div>
-                        <label className="block text-gray-700 mb-1">Nombre completo</label>
+                        <label className="form-label">Dirección</label>
                         <input
                             type="text"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
+                            value={direccion}
+                            onChange={(e) => setDireccion(e.target.value)}
+                            className="form-input"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 mb-1">Correo electrónico</label>
+                        <label className="form-label">Celular</label>
+                        <input
+                            type="text"
+                            value={celular}
+                            onChange={(e) => setCelular(e.target.value)}
+                            className="form-input"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="form-label">Correo electrónico</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
+                            className="form-input"
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-gray-700 mb-1">Contraseña</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
-                        />
-                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="form-label">Contraseña</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                className="form-input"
+                            />
+                        </div>
 
-                    <div>
-                        <label className="block text-gray-700 mb-1">Confirmar Contraseña</label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
-                        />
+                        <div>
+                            <label className="form-label">Confirmar Contraseña</label>
+                            <input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
+                            />
+                        </div>
                     </div>
 
                     <button
@@ -106,7 +143,7 @@ export default function RegistrarAdmin() {
 
                 <div className="mt-4 text-center">
                     <p className="text-gray-600 text-sm">
-                        ¿Ya tienes cuenta?{" "}
+                        ¿Ya tienes cuenta?{' '}
                         <a href="/login" className="text-blue-900 hover:underline">
                             Iniciar sesión
                         </a>

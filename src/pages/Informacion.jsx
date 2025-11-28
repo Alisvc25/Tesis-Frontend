@@ -1,62 +1,69 @@
 export default function Informacion() {
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Hero / Header */}
-            <header className="bg-blue-900 text-white py-16">
-                <div className="max-w-6xl mx-auto px-6 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                        Unidad Educativa Intercultural Bilingüe “Tránsito Amaguaña”
-                    </h1>
-                    <p className="text-lg md:text-xl">
-                        Formación de estudiantes con valores, identidad cultural y excelencia académica.
-                    </p>
-                </div>
-            </header>
+        <div className="p-10 text-center">
+            <h1 className="text-3xl font-bold mb-4 text-blue-900">
+                Información de la Unidad Educativa
+            </h1>
 
-            {/* Misión */}
-            <section className="py-16 bg-white">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h2 className="text-3xl font-bold text-blue-900 mb-4">Misión</h2>
-                    <p className="text-gray-700 text-lg leading-relaxed">
-                        La misión de nuestra institución es formar estudiantes competentes, éticos y responsables,
-                        promoviendo la interculturalidad, bilingüismo y el desarrollo integral de cada persona.
-                    </p>
-                </div>
+            <img
+                src="/images/colegio.jpg"
+                alt="Unidad Educativa"
+                className="mx-auto rounded-lg shadow-lg w-96 mb-6"
+            />
+
+            <p className="text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto mb-10">
+                Bienvenido al sistema académico de la Unidad Educativa Intercultural
+                Bilingüe “Tránsito Amaguaña”. Aquí podrás conocer más sobre nuestra misión,
+                visión y algunos aspectos importantes de nuestra institución.
+            </p>
+
+            {/* MISIÓN */}
+            <img
+                src="/images/mision.jpg"
+                alt="Unidad Educativa"
+                className="mx-auto rounded-lg shadow-lg w-96 mb-6"
+            />
+            <section className="max-w-3xl mx-auto mb-10">
+                <h2 className="text-2xl font-semibold text-blue-800 mb-3">Misión</h2>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                    Formar estudiantes con valores, conocimientos y competencias académicas
+                    sólidas, promoviendo el respeto a la diversidad cultural y lingüística.
+                    Nuestra institución impulsa una educación inclusiva, participativa y 
+                    orientada al desarrollo integral de la comunidad educativa.
+                </p>
             </section>
 
-            {/* Visión */}
-            <section className="py-16 bg-gray-50">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h2 className="text-3xl font-bold text-blue-900 mb-4">Visión</h2>
-                    <p className="text-gray-700 text-lg leading-relaxed">
-                        Ser una institución reconocida por la excelencia académica y la formación integral,
-                        promoviendo valores interculturales y bilingües, y contribuyendo al desarrollo de la comunidad.
-                    </p>
-                </div>
+            {/* VISIÓN */}
+            <img
+                src="/images/vision.jpg"
+                alt="Unidad Educativa"
+                className="mx-auto rounded-lg shadow-lg w-96 mb-6"
+            />
+            <section className="max-w-3xl mx-auto mb-10">
+                <h2 className="text-2xl font-semibold text-blue-800 mb-3">Visión</h2>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                    Ser una institución educativa referente en el país por su excelencia
+                    académica, su compromiso intercultural y el fortalecimiento de la identidad.
+                    Aspiramos a formar generaciones capaces de transformar positivamente su entorno
+                    con responsabilidad social y sentido comunitario.
+                </p>
             </section>
 
-            {/* Historia */}
-            <section className="py-16 bg-white">
-                <div className="max-w-4xl mx-auto px-6">
-                    <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Historia</h2>
-                    <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                        La Unidad Educativa Intercultural Bilingüe “Tránsito Amaguaña” fue fundada con el propósito
-                        de brindar educación de calidad a estudiantes de diversas culturas, fomentando el respeto,
-                        la identidad y la inclusión.
-                    </p>
-                    <p className="text-gray-700 text-lg leading-relaxed">
-                        A lo largo de los años, se ha consolidado como un referente en educación intercultural y bilingüe,
-                        combinando métodos tradicionales con innovación pedagógica para el desarrollo integral de los estudiantes.
-                    </p>
-                </div>
+            {/* DATO CURIOSO */}
+            <img
+                src="/images/transito.jpg"
+                alt="Unidad Educativa"
+                className="mx-auto rounded-lg shadow-lg w-96 mb-6"
+            />
+            <section className="max-w-3xl mx-auto mb-10">
+                <h2 className="text-2xl font-semibold text-blue-800 mb-3">Dato Curioso</h2>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                    ¿Sabías que la Unidad Educativa “Tránsito Amaguaña” lleva el nombre de una de 
+                    las lideresas indígenas más importantes del Ecuador? Tránsito Amaguaña fue una 
+                    defensora incansable de los derechos de los pueblos indígenas, y su legado inspira 
+                    a nuestra comunidad educativa hasta el día de hoy.
+                </p>
             </section>
-
-            {/* Footer */}
-            <footer className="bg-blue-900 text-white py-6 mt-12">
-                <div className="max-w-6xl mx-auto px-6 text-center">
-                    <p>© 2025 Unidad Educativa Intercultural Bilingüe “Tránsito Amaguaña”. Todos los derechos reservados.</p>
-                </div>
-            </footer>
         </div>
     );
 }

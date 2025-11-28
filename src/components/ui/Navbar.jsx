@@ -1,56 +1,49 @@
-// src/components/ui/Navbar.jsx
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../context/useAuth.jsx";
 
-export default function Navbar({ onSelectPerfil }) {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [perfilOpen, setPerfilOpen] = useState(false);
+export default function Navbar() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
+    const isActive = (path) => location.pathname === path;
+    const handleLogout = () => {
+        logout();
+        navigate("/") ;
+    };
+
 
     return (
-        <nav className="bg-blue-900 text-white p-4">
-            <div className="flex justify-between items-center">
-                <h1 className="text-lg font-bold">
-                    Unidad Educativa Intercultural Bilingüe "Tránsito Amaguaña"
-                </h1>
-                <div className="md:hidden">
-                    <button onClick={() => setMenuOpen(!menuOpen)}>
-                        &#9776; {/* ícono de 3 rayitas */}
-                    </button>
-                </div>
-                <ul className={`md:flex md:items-center ${menuOpen ? "block" : "hidden"}`}>
-                    <li className="px-4 py-2 hover:bg-blue-700 cursor-pointer">Información</li>
-                    <li className="px-4 py-2 hover:bg-blue-700 cursor-pointer">Sobre Nosotros</li>
-                    <li className="px-4 py-2 hover:bg-blue-700 cursor-pointer">Contáctanos</li>
-                    <li
-                        className="px-4 py-2 hover:bg-blue-700 cursor-pointer relative"
-                        onMouseEnter={() => setPerfilOpen(true)}
-                        onMouseLeave={() => setPerfilOpen(false)}
-                    >
-                        Perfiles
-                        {perfilOpen && (
-                            <ul className="absolute left-0 top-full bg-white text-blue-900 shadow-md rounded w-48">
-                                <li
-                                    className="px-4 py-2 hover:bg-blue-200 cursor-pointer"
-                                    onClick={() => onSelectPerfil("Administrador")}
-                                >
-                                    Administrador
-                                </li>
-                                <li
-                                    className="px-4 py-2 hover:bg-blue-200 cursor-pointer"
-                                    onClick={() => onSelectPerfil("Docente")}
-                                >
-                                    Docente
-                                </li>
-                                <li
-                                    className="px-4 py-2 hover:bg-blue-200 cursor-pointer"
-                                    onClick={() => onSelectPerfil("Estudiante")}
-                                >
-                                    Estudiante
-                                </li>
-                            </ul>
-                        )}
+        <nav className="bg-blue-900 text-white py-4 shadow-lg">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+
+                <h2 className="font-semibold text-lg">
+                    Unidad Educativa Intercultural Bilingüe Tránsito Amaguaña
+                </h2>
+
+                <ul className="flex space-x-6 font-medium items-center">
+                    <li>
+                        <Link to="/" className={isActive('/') ? 'underline font-semibold' : 'hover:underline'}>Inicio</Link>
+                    </li>
+                    <li>
+                        <Link to="/informacion" className={isActive('/informacion') ? 'underline font-semibold' : 'hover:underline'}>Información</Link>
+                    </li>
+                    <li>
+                        <Link to="/sobre-nosotros" className={isActive('/sobre-nosotros') ? 'underline font-semibold' : 'hover:underline'}>Sobre Nosotros</Link>
+                    </li>
+                    <li>
+                        <Link to="/noticias" className={isActive('/noticias') ? 'underline font-semibold' : 'hover:underline'}>Noticias y Eventos</Link>
                     </li>
                 </ul>
-            </div>
+
+
+
+                    {user && (
+                        <>
+                            <div className="text-sm mr-2">{user.nombre ?? user.name ?? ''} {user.apellido ?? ''} ({user.role})</div>
+                            <Link to="/"><button onClick={handleLogout} className="bg-white text-blue-900 px-3 py-1 rounded text-sm font-medium">Salir</button></Link>
+                        </>
+                    )}
+                </div>
         </nav>
     );
 }

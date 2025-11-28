@@ -8,7 +8,7 @@ export default function Sidebar() {
 
     const links = [];
 
-    if (user.role === "admin") {
+    if (user.role === "administrador") {
         links.push(
             { name: "Dashboard", path: "/admin" },
             { name: "Registrar Docente", path: "/admin/registrar-docente" },

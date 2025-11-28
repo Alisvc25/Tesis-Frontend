@@ -3,12 +3,16 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const adminApi = {
+    registrarAdmin: async (data) => {
+        const res = await axios.post(`${API_URL}/administrador/registro`, data);
+        return res.data;
+    },
     registrarDocente: async (data) => {
-        const res = await axios.post(`${API_URL}/registroDocente`, data);
+        const res = await axios.post(`${API_URL}/administrador/registroDocente`, data);
         return res.data;
     },
     registrarEstudiante: async (data) => {
-        const res = await axios.post(`${API_URL}/registroEstudiante`, data);
+        const res = await axios.post(`${API_URL}/administrador/registroEstudiante`, data);
         return res.data;
     },
     actualizarPassword: async (id, data, token) => {

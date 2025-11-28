@@ -8,7 +8,7 @@ export default function AdminRoute({ children }) {
         return <Navigate to="/login" replace />;
     }
 
-    if (user.role !== "admin") {
+    if (user.role !== "administrador") {
         return <Navigate to="/" replace />; // o a su dashboard correspondiente
     }
 
