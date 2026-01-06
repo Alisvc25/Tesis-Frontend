@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { obtenerCalificacion } from "../api/docenteApi";
+import { estudianteApi } from "../api/estudianteApi";
 import { useParams } from "react-router-dom";
-import DocenteLayout from "../layout/DocenteLayout";
+import EstudianteLayout from "../layout/EstudianteLayout";
 
 export default function VerCalificaciones() {
     const { id } = useParams();
     const [calificacion, setCalificacion] = useState(null);
 
     useEffect(() => {
-        obtenerCalificacion(id).then(setCalificacion);
-    }, []);
+        console.log("ID recibido desde useParams:", id); // Depuración
+        estudianteApi.obtenerCalificacion(id)
+            .then(setCalificacion)
+            .catch(() => console.log("Error cargando calificación"));
+    }, [id]);
 
     if (!calificacion) return <p>Cargando...</p>;
 
     return (
-        <DocenteLayout>
+        <EstudianteLayout>
             <h1 className="dashboard-title">{calificacion.materia}</h1>
 
             <div className="dashboard-card">
@@ -24,6 +27,6 @@ export default function VerCalificaciones() {
                     {JSON.stringify(calificacion, null, 2)}
                 </pre>
             </div>
-        </DocenteLayout>
+        </EstudianteLayout>
     );
 }

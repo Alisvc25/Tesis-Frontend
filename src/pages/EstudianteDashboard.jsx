@@ -9,13 +9,28 @@ export default function EstudianteDashboard() {
     const [calificaciones, setCalificaciones] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    /*
+        const fetchCalificaciones = async () => {
+            setLoading(true);
+            setError("");
+            try {
+                const res = await estudianteApi.listarCalificaciones(user.token);
+                setCalificaciones(res.data);
+            } catch (err) {
+                setError(err.response?.data?.msg || "Error al cargar calificaciones");
+            } finally {
+                setLoading(false);
+            }
+        };
+    */
 
     const fetchCalificaciones = async () => {
         setLoading(true);
         setError("");
         try {
+            console.log("User en contexto:", user);
             const res = await estudianteApi.listarCalificaciones(user.id, user.token);
-            setCalificaciones(res.data);
+            setCalificaciones(res);
         } catch (err) {
             setError(err.response?.data?.msg || "Error al cargar calificaciones");
         } finally {

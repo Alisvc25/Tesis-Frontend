@@ -11,27 +11,28 @@ import PoliticaTerminos from "./pages/PoliticaTerminos.jsx";
 import Noticias from "./pages/NoticiasEventos.jsx";
 import Nosotros from "./pages/Nosotros.jsx";
 
-// Dashboards
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import DocenteDashboard from "./pages/DocenteDashboard.jsx";
 import EstudianteDashboard from "./pages/EstudianteDashboard.jsx";
 import RegistrarDocente from "./pages/RegistrarDocente.jsx";
 import RegistrarEstudiante from "./pages/RegistrarEstudiante.jsx";
 
-// Rutas protegidas
+import CrearCalificacion from "./pages/CrearCalificacion.jsx";
+import ListarCalificaciones from "./pages/ListarCalificaciones.jsx";
+
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-// Layouts
 import AdminLayout from "./layout/AdminLayout.jsx";
 import DocenteLayout from "./layout/DocenteLayout.jsx";
 import EstudianteLayout from "./layout/EstudianteLayout.jsx";
+import VerCalificaciones from "./pages/VerCalificaciones.jsx";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Routes>
 
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/informacion" element={<Informacion />} />
@@ -39,9 +40,6 @@ function App() {
         <Route path="/terminos" element={<PoliticaTerminos />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/sobre-nosotros" element={<Nosotros />} />
-
-
-
         <Route path="/registro" element={<RegistrarAdmin />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
@@ -62,25 +60,28 @@ function App() {
           path="/docente/*"
           element={
             <ProtectedRoute role="docente">
-              <DocenteLayout>
-                <DocenteDashboard />
-              </DocenteLayout>
+              <DocenteLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<DocenteDashboard />} />
+          <Route path="crear-calificacion" element={<CrearCalificacion />} />
+          <Route path="listar-calificaciones" element={<ListarCalificaciones />} />
+        </Route>
 
         <Route
           path="/estudiante/*"
           element={
             <ProtectedRoute role="estudiante">
-              <EstudianteLayout>
-                <EstudianteDashboard />
-              </EstudianteLayout>
+              <EstudianteLayout />
             </ProtectedRoute>
           }
-        />
-
+        >
+          <Route index element={<EstudianteDashboard />} />
+          <Route path="ver-calificaciones/:id" element={<VerCalificaciones />} />
+        </Route>
       </Routes>
+
       <Footer />
     </>
   );

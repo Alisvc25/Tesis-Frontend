@@ -10,14 +10,20 @@ export default function ListarCalificaciones() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [editId, setEditId] = useState(null);
-    const [editData, setEditData] = useState({ materia: "", calificacion: "" });
+    const [editData, setEditData] = useState({
+        materia: "",
+        parcial1: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 },
+        parcial2: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 },
+        parcial3: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 }
+    });
 
     const fetchCalificaciones = async () => {
         setLoading(true);
         setError("");
+
         try {
-            const res = await docenteApi.listarCalificaciones(user.id, user.token);
-            setCalificaciones(res.data);
+            const res = await docenteApi.listarCalificaciones(user._id, user.token);
+            setCalificaciones(res);
         } catch (err) {
             setError(err.response?.data?.msg || "Error al cargar calificaciones");
         } finally {
@@ -31,6 +37,7 @@ export default function ListarCalificaciones() {
 
     const handleDelete = async (id) => {
         if (!confirm("¿Desea eliminar esta calificación?")) return;
+
         try {
             await docenteApi.eliminarCalificacion(id, user.token);
             fetchCalificaciones();
@@ -41,7 +48,12 @@ export default function ListarCalificaciones() {
 
     const handleEdit = (cal) => {
         setEditId(cal._id);
-        setEditData({ materia: cal.materia, calificacion: cal.calificacion });
+        setEditData({
+            materia: cal.materia,
+            parcial1: cal.parcial1,
+            parcial2: cal.parcial2,
+            parcial3: cal.parcial3
+        });
     };
 
     const handleUpdate = async () => {
@@ -65,42 +77,77 @@ export default function ListarCalificaciones() {
             <table className="min-w-full bg-white border">
                 <thead className="bg-blue-900 text-white">
                     <tr>
-                        <th className="py-2 px-4">Estudiante ID</th>
                         <th className="py-2 px-4">Materia</th>
-                        <th className="py-2 px-4">Calificación</th>
+                        <th className="py-2 px-4">Parcial 1</th>
+                        <th className="py-2 px-4">Parcial 2</th>
+                        <th className="py-2 px-4">Parcial 3</th>
+                        <th className="py-2 px-4">Promedio Final</th>
+                        <th className="py-2 px-4">Estudiante</th>
+                        <th className="py-2 px-4">Docente</th>
                         <th className="py-2 px-4">Acciones</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {calificaciones.map((cal) => (
                         <tr key={cal._id} className="border-b">
-                            <td className="py-2 px-4">{cal.estudianteId}</td>
+
+                            {/* MATERIA */}
                             <td className="py-2 px-4">
                                 {editId === cal._id ? (
                                     <input
                                         type="text"
                                         value={editData.materia}
-                                        onChange={(e) => setEditData({ ...editData, materia: e.target.value })}
+                                        onChange={(e) =>
+                                            setEditData({ ...editData, materia: e.target.value })
+                                        }
                                         className="border p-1 rounded w-full"
                                     />
                                 ) : (
                                     cal.materia
                                 )}
                             </td>
+
+                            {/* PARCIAL 1 */}
                             <td className="py-2 px-4">
-                                {editId === cal._id ? (
-                                    <input
-                                        type="number"
-                                        value={editData.calificacion}
-                                        onChange={(e) =>
-                                            setEditData({ ...editData, calificacion: e.target.value })
-                                        }
-                                        className="border p-1 rounded w-full"
-                                    />
-                                ) : (
-                                    cal.calificacion
-                                )}
+                                <strong>Promedio:</strong> {cal.parcial1.promedio} <br />
+                                <span className="text-sm text-gray-600">
+                                    D: {cal.parcial1.deberes} | E: {cal.parcial1.examenes} | T: {cal.parcial1.trabajosClase} | P: {cal.parcial1.proyectos}
+                                </span>
                             </td>
+
+                            {/* PARCIAL 2 */}
+                            <td className="py-2 px-4">
+                                <strong>Promedio:</strong> {cal.parcial2.promedio} <br />
+                                <span className="text-sm text-gray-600">
+                                    D: {cal.parcial2.deberes} | E: {cal.parcial2.examenes} | T: {cal.parcial2.trabajosClase} | P: {cal.parcial2.proyectos}
+                                </span>
+                            </td>
+
+                            {/* PARCIAL 3 */}
+                            <td className="py-2 px-4">
+                                <strong>Promedio:</strong> {cal.parcial3.promedio} <br />
+                                <span className="text-sm text-gray-600">
+                                    D: {cal.parcial3.deberes} | E: {cal.parcial3.examenes} | T: {cal.parcial3.trabajosClase} | P: {cal.parcial3.proyectos}
+                                </span>
+                            </td>
+
+                            {/* PROMEDIO FINAL */}
+                            <td className="py-2 px-4 font-bold text-blue-900">
+                                {cal.promedioFinal}
+                            </td>
+
+                            {/* ESTUDIANTE */}
+                            <td className="py-2 px-4">
+                                {cal.estudiante?.nombres} {cal.estudiante?.apellidos}
+                            </td>
+
+                            {/* DOCENTE */}
+                            <td className="py-2 px-4">
+                                {cal.docente?.nombres} {cal.docente?.apellidos}
+                            </td>
+
+                            {/* BOTONES */}
                             <td className="py-2 px-4 flex gap-2">
                                 {editId === cal._id ? (
                                     <>
@@ -110,6 +157,7 @@ export default function ListarCalificaciones() {
                                         >
                                             Guardar
                                         </button>
+
                                         <button
                                             onClick={() => setEditId(null)}
                                             className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
@@ -125,6 +173,7 @@ export default function ListarCalificaciones() {
                                         >
                                             Editar
                                         </button>
+
                                         <button
                                             onClick={() => handleDelete(cal._id)}
                                             className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
@@ -134,6 +183,7 @@ export default function ListarCalificaciones() {
                                     </>
                                 )}
                             </td>
+
                         </tr>
                     ))}
                 </tbody>

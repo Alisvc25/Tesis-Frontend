@@ -4,9 +4,16 @@ const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const estudianteApi = {
     listarCalificaciones: async (id, token) => {
-        const res = await axios.get(`${API_URL}/estudiante/calificaciones/${id}`, {
+        const res = await axios.get(`${API_URL}/apiE/calificaciones/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return res.data;
     },
+
+    obtenerCalificacion: async (id, token) => {
+        const res = await axios.get(`${API_URL}/apiE/calificacion/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return res.data;
+    }
 };
