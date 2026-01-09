@@ -8,10 +8,10 @@ export default function CrearCalificacion() {
 
     const [estudiante, setEstudiante] = useState("");
     const [materia, setMateria] = useState("");
-    const [deberes, setDeberes] = useState(0);
-    const [examenes, setExamenes] = useState(0);
-    const [trabajosClase, setTrabajosClase] = useState(0);
-    const [proyectos, setProyectos] = useState(0);
+    const [deberes, setDeberes] = useState("");
+    const [examenes, setExamenes] = useState("");
+    const [trabajosClase, setTrabajosClase] = useState("");
+    const [proyectos, setProyectos] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -20,43 +20,6 @@ export default function CrearCalificacion() {
     const [parcial, setParcial] = useState("parcial1");
     const [calificacionId, setCalificacionId] = useState(null);
 
-    /*
-        const handleSubmit = async (e) => {
-            e.preventDefault();
-            setLoading(true);
-            setError("");
-            setSuccess("");
-    
-            try {
-                await docenteApi.crearCalificacion(
-                    {
-                        estudiante,
-                        //docente: user._id,
-                        materia,
-                        parcial1: {
-                            deberes,
-                            examenes,
-                            trabajosClase,
-                            proyectos
-                        }
-                    },
-                    user.token
-                );
-    
-                setSuccess("Calificación registrada correctamente");
-                setEstudiante("");
-                setMateria("");
-                setDeberes(0);
-                setExamenes(0);
-                setTrabajosClase(0);
-                setProyectos(0);
-            } catch (err) {
-                setError(err.response?.data?.msg || "Error al crear calificación");
-            } finally {
-                setLoading(false);
-            }
-        };*/
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -64,28 +27,27 @@ export default function CrearCalificacion() {
         setSuccess("");
 
         const notas = {
-            deberes,
-            examenes,
-            trabajosClase,
-            proyectos
+            deberes: Number(deberes) || 0,
+            examenes: Number(examenes) || 0,
+            trabajosClase: Number(trabajosClase) || 0,
+            proyectos: Number(proyectos) || 0
         };
+
 
         try {
             if (parcial === "parcial1" && !calificacionId) {
-                // CREAR CALIFICACIÓN
                 const res = await docenteApi.crearCalificacion(
                     {
                         estudiante,
+                        docente: user._id,
                         materia,
                         parcial1: notas
                     },
                     user.token
                 );
-
-                setCalificacionId(res.data.nueva._id);
+                setCalificacionId(res.nueva._id);
                 setSuccess("Parcial 1 registrado correctamente");
             } else {
-                // ACTUALIZAR PARCIAL 2 O 3
                 await docenteApi.actualizarCalificacion(
                     calificacionId,
                     {
@@ -93,15 +55,13 @@ export default function CrearCalificacion() {
                     },
                     user.token
                 );
-
                 setSuccess(`${parcial} registrado correctamente`);
             }
 
-            // limpiar notas
-            setDeberes(0);
-            setExamenes(0);
-            setTrabajosClase(0);
-            setProyectos(0);
+            setDeberes("");
+            setExamenes("");
+            setTrabajosClase("");
+            setProyectos("");
 
         } catch (err) {
             setError(err.response?.data?.msg || "Error al guardar calificación");
@@ -109,7 +69,6 @@ export default function CrearCalificacion() {
             setLoading(false);
         }
     };
-
 
     return (
         <>
@@ -167,8 +126,16 @@ export default function CrearCalificacion() {
                     <label>Deberes</label>
                     <input
                         type="number"
+                        step="0.01"
+                        min="0"
+                        max="20"
                         value={deberes}
-                        onChange={(e) => setDeberes(Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === "" || (!isNaN(val) && Number(val) >= 0 && Number(val) <= 20)) {
+                                setDeberes(val);
+                            }
+                        }}
                         className="w-full border p-2 rounded"
                     />
                 </div>
@@ -177,8 +144,16 @@ export default function CrearCalificacion() {
                     <label>Exámenes</label>
                     <input
                         type="number"
+                        min="0"
+                        step="0.01"
+                        max="20"
                         value={examenes}
-                        onChange={(e) => setExamenes(Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === "" || (!isNaN(val) && Number(val) >= 0 && Number(val) <= 20)) {
+                                setExamenes(val);
+                            }
+                        }}
                         className="w-full border p-2 rounded"
                     />
                 </div>
@@ -187,8 +162,16 @@ export default function CrearCalificacion() {
                     <label>Trabajos en clase</label>
                     <input
                         type="number"
+                        min="0"
+                        step="0.01"
+                        max="20"
                         value={trabajosClase}
-                        onChange={(e) => setTrabajosClase(Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === "" || (!isNaN(val) && Number(val) >= 0 && Number(val) <= 20)) {
+                                setTrabajosClase(val);
+                            }
+                        }}
                         className="w-full border p-2 rounded"
                     />
                 </div>
@@ -197,8 +180,16 @@ export default function CrearCalificacion() {
                     <label>Proyectos</label>
                     <input
                         type="number"
+                        min="0"
+                        step="0.01"
+                        max="20"
                         value={proyectos}
-                        onChange={(e) => setProyectos(Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === "" || (!isNaN(val) && Number(val) >= 0 && Number(val) <= 20)) {
+                                setProyectos(val);
+                            }
+                        }}
                         className="w-full border p-2 rounded"
                     />
                 </div>

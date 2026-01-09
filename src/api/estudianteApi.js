@@ -9,11 +9,4 @@ export const estudianteApi = {
         });
         return res.data;
     },
-
-    obtenerCalificacion: async (id, token) => {
-        const res = await axios.get(`${API_URL}/apiE/calificacion/${id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        return res.data;
-    }
 };

@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, replace, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../context/useAuth.jsx";
 
 export default function Navbar() {
@@ -8,7 +8,7 @@ export default function Navbar() {
     const isActive = (path) => location.pathname === path;
     const handleLogout = () => {
         logout();
-        navigate("/") ;
+        navigate("/", { replace: true });
     };
 
 
@@ -35,15 +35,18 @@ export default function Navbar() {
                     </li>
                 </ul>
 
+                {user && (
+                    <>
+                        <div className="text-sm mr-2">
+                            {user.nombre ?? user.name ?? ''} {user.apellido ?? ''} ({user.role})
+                        </div>
 
-
-                    {user && (
-                        <>
-                            <div className="text-sm mr-2">{user.nombre ?? user.name ?? ''} {user.apellido ?? ''} ({user.role})</div>
-                            <Link to="/"><button onClick={handleLogout} className="bg-white text-blue-900 px-3 py-1 rounded text-sm font-medium">Salir</button></Link>
-                        </>
-                    )}
-                </div>
+                        <button
+                            onClick={handleLogout} className="bg-white text-blue-900 px-3 py-1 rounded text-sm font-medium">Salir
+                        </button>
+                    </>
+                )}
+            </div>
         </nav>
     );
 }

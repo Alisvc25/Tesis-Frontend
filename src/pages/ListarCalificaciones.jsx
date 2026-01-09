@@ -12,9 +12,9 @@ export default function ListarCalificaciones() {
     const [editId, setEditId] = useState(null);
     const [editData, setEditData] = useState({
         materia: "",
-        parcial1: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 },
-        parcial2: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 },
-        parcial3: { deberes: 0, examenes: 0, trabajosClase: 0, proyectos: 0 }
+        parcial1: { deberes: "", examenes: "", trabajosClase: "", proyectos: "" },
+        parcial2: { deberes: "", examenes: "", trabajosClase: "", proyectos: "" },
+        parcial3: { deberes: "", examenes: "", trabajosClase: "", proyectos: "" }
     });
 
     const fetchCalificaciones = async () => {
@@ -110,26 +110,186 @@ export default function ListarCalificaciones() {
 
                             {/* PARCIAL 1 */}
                             <td className="py-2 px-4">
-                                <strong>Promedio:</strong> {cal.parcial1.promedio} <br />
-                                <span className="text-sm text-gray-600">
-                                    D: {cal.parcial1.deberes} | E: {cal.parcial1.examenes} | T: {cal.parcial1.trabajosClase} | P: {cal.parcial1.proyectos}
-                                </span>
+                                {editId === cal._id ? (
+                                    <div className="flex flex-col gap-1 text-sm">
+                                        <span className="font-semibold text-blue-900">Parcial 1</span>
+
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={editData.parcial1.deberes}
+                                            onChange={(e) =>
+                                                setEditData({
+                                                    ...editData,
+                                                    parcial1: {
+                                                        ...editData.parcial1,
+                                                        deberes: Math.min(20, Math.max(0, e.target.value))
+                                                    }
+                                                })
+                                            }
+                                            className="border p-1 rounded"
+                                            placeholder="Deberes"
+                                        />
+
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={editData.parcial1.examenes}
+                                            onChange={(e) =>
+                                                setEditData({
+                                                    ...editData,
+                                                    parcial1: {
+                                                        ...editData.parcial1,
+                                                        examenes: Math.min(20, Math.max(0, e.target.value))
+                                                    }
+                                                })
+                                            }
+                                            className="border p-1 rounded"
+                                            placeholder="Exámenes"
+                                        />
+
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={editData.parcial1.trabajosClase}
+                                            onChange={(e) =>
+                                                setEditData({
+                                                    ...editData,
+                                                    parcial1: {
+                                                        ...editData.parcial1,
+                                                        trabajosClase: Math.min(20, Math.max(0, e.target.value))
+                                                    }
+                                                })
+                                            }
+                                            className="border p-1 rounded"
+                                            placeholder="Trabajos"
+                                        />
+
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={editData.parcial1.proyectos}
+                                            onChange={(e) =>
+                                                setEditData({
+                                                    ...editData,
+                                                    parcial1: {
+                                                        ...editData.parcial1,
+                                                        proyectos: Math.min(20, Math.max(0, e.target.value))
+                                                    }
+                                                })
+                                            }
+                                            className="border p-1 rounded"
+                                            placeholder="Proyectos"
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <strong>Promedio:</strong> {cal.parcial1.promedio} <br />
+                                        <span className="text-sm text-gray-600">
+                                            D: {cal.parcial1.deberes} | E: {cal.parcial1.examenes} | T: {cal.parcial1.trabajosClase} | P: {cal.parcial1.proyectos}
+                                        </span>
+                                    </>
+                                )}
                             </td>
 
                             {/* PARCIAL 2 */}
                             <td className="py-2 px-4">
-                                <strong>Promedio:</strong> {cal.parcial2.promedio} <br />
-                                <span className="text-sm text-gray-600">
-                                    D: {cal.parcial2.deberes} | E: {cal.parcial2.examenes} | T: {cal.parcial2.trabajosClase} | P: {cal.parcial2.proyectos}
-                                </span>
+                                {editId === cal._id ? (
+                                    <div className="flex flex-col gap-1 text-sm">
+                                        <span className="font-semibold text-blue-900">Parcial 2</span>
+
+                                        <input type="number" min="0" max="20" value={editData.parcial2.deberes}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial2: { ...editData.parcial2, deberes: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Deberes"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial2.examenes}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial2: { ...editData.parcial2, examenes: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Exámenes"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial2.trabajosClase}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial2: { ...editData.parcial2, trabajosClase: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Trabajos"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial2.proyectos}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial2: { ...editData.parcial2, proyectos: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Proyectos"
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <strong>Promedio:</strong> {cal.parcial2.promedio} <br />
+                                        <span className="text-sm text-gray-600">
+                                            D: {cal.parcial2.deberes} | E: {cal.parcial2.examenes} | T: {cal.parcial2.trabajosClase} | P: {cal.parcial2.proyectos}
+                                        </span>
+                                    </>
+                                )}
                             </td>
 
                             {/* PARCIAL 3 */}
                             <td className="py-2 px-4">
-                                <strong>Promedio:</strong> {cal.parcial3.promedio} <br />
-                                <span className="text-sm text-gray-600">
-                                    D: {cal.parcial3.deberes} | E: {cal.parcial3.examenes} | T: {cal.parcial3.trabajosClase} | P: {cal.parcial3.proyectos}
-                                </span>
+                                {editId === cal._id ? (
+                                    <div className="flex flex-col gap-1 text-sm">
+                                        <span className="font-semibold text-blue-900">Parcial 3</span>
+
+                                        <input type="number" min="0" max="20" value={editData.parcial3.deberes}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial3: { ...editData.parcial3, deberes: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Deberes"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial3.examenes}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial3: { ...editData.parcial3, examenes: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Exámenes"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial3.trabajosClase}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial3: { ...editData.parcial3, trabajosClase: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Trabajos"
+                                        />
+
+                                        <input type="number" min="0" max="20" value={editData.parcial3.proyectos}
+                                            onChange={(e) => setEditData({
+                                                ...editData,
+                                                parcial3: { ...editData.parcial3, proyectos: Math.min(20, Math.max(0, e.target.value)) }
+                                            })}
+                                            className="border p-1 rounded" placeholder="Proyectos"
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <strong>Promedio:</strong> {cal.parcial3.promedio} <br />
+                                        <span className="text-sm text-gray-600">
+                                            D: {cal.parcial3.deberes} | E: {cal.parcial3.examenes} | T: {cal.parcial3.trabajosClase} | P: {cal.parcial3.proyectos}
+                                        </span>
+                                    </>
+                                )}
                             </td>
 
                             {/* PROMEDIO FINAL */}
@@ -139,12 +299,12 @@ export default function ListarCalificaciones() {
 
                             {/* ESTUDIANTE */}
                             <td className="py-2 px-4">
-                                {cal.estudiante?.nombres} {cal.estudiante?.apellidos}
+                                {cal.estudiante?.nombre} {cal.estudiante?.apellido}
                             </td>
 
                             {/* DOCENTE */}
                             <td className="py-2 px-4">
-                                {cal.docente?.nombres} {cal.docente?.apellidos}
+                                {cal.docente?.nombre} {cal.docente?.apellido}
                             </td>
 
                             {/* BOTONES */}

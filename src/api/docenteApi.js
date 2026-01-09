@@ -30,4 +30,5 @@ export const docenteApi = {
         });
         return res.data;
     },
+
 };

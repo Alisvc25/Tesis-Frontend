@@ -4,11 +4,17 @@ import Loader from "../components/ui/Loader.jsx";
 import ErrorAlert from "../components/ui/ErrorAlert.jsx";
 
 export default function RegistrarEstudiante() {
+    const cursos = ["Inicial1", "Inicial2", "2do", "3ro", "4to",
+        "5to", "6to", "7mo", "8vo", "9no", "10mo", 
+        "1ro BGU", "2do BGU", "3ro BGU"];
+    const nacionalidades = ["Ecuatoriana", "Colombiana", "Venezolana", "Otro"];
+
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [cedula, setCedula] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [nacionalidad, setNacionalidad] = useState("");
+    const [otraNacionalidad, setOtraNacionalidad] = useState("");
     const [direccion, setDireccion] = useState("");
     const [curso, setCurso] = useState("");
     const [celular, setCelular] = useState("");
@@ -19,29 +25,34 @@ export default function RegistrarEstudiante() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setError("");
         setSuccess("");
 
+        if (cedula.length !== 10) return setError("La cédula debe tener 10 dígitos");
+        if (celular && celular.length !== 10) return setError("El celular debe tener 10 dígitos");
+
+        setLoading(true);
+
         try {
-            const payload = {
+            await adminApi.registrarEstudiante({
                 nombre,
                 apellido,
                 cedula,
                 fechaNacimiento,
-                nacionalidad,
+                nacionalidad: nacionalidad === "Otro" ? otraNacionalidad : nacionalidad,
                 direccion,
                 curso,
                 celular,
                 email,
-            };
-            await adminApi.registrarEstudiante(payload);
+            });
+
             setSuccess("Estudiante registrado correctamente");
             setNombre("");
             setApellido("");
             setCedula("");
             setFechaNacimiento("");
             setNacionalidad("");
+            setOtraNacionalidad("");
             setDireccion("");
             setCurso("");
             setCelular("");
@@ -61,108 +72,90 @@ export default function RegistrarEstudiante() {
             {success && <div className="bg-green-100 text-green-700 px-4 py-3 rounded mb-4">{success}</div>}
 
             <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+
                 <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-gray-700 mb-1">Nombre</label>
-                        <input
-                            type="text"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700 mb-1">Apellido</label>
-                        <input
-                            type="text"
-                            value={apellido}
-                            onChange={(e) => setApellido(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                        />
-                    </div>
+                    <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                        placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} required />
+                    <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                        placeholder="Apellido" value={apellido} onChange={e => setApellido(e.target.value)} required />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-gray-700 mb-1">Cédula</label>
-                        <input
-                            type="text"
-                            value={cedula}
-                            onChange={(e) => setCedula(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700 mb-1">Fecha de nacimiento</label>
-                        <input
-                            type="date"
-                            value={fechaNacimiento}
-                            onChange={(e) => setFechaNacimiento(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                        />
-                    </div>
-                </div>
-
-                <div>
-                    <label className="block text-gray-700 mb-1">Nacionalidad</label>
                     <input
-                        type="text"
-                        value={nacionalidad}
-                        onChange={(e) => setNacionalidad(e.target.value)}
                         className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-gray-700 mb-1">Dirección</label>
-                    <input
-                        type="text"
-                        value={direccion}
-                        onChange={(e) => setDireccion(e.target.value)}
-                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-gray-700 mb-1">Curso</label>
-                    <input
-                        type="text"
-                        value={curso}
-                        onChange={(e) => setCurso(e.target.value)}
+                        placeholder="Cédula"
+                        value={cedula}
+                        onChange={e => {
+                            const v = e.target.value.replace(/\D/g, "");
+                            if (v.length <= 10) setCedula(v);
+                        }}
                         required
-                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
                     />
-                </div>
 
-                <div>
-                    <label className="block text-gray-700 mb-1">Celular</label>
                     <input
-                        type="text"
-                        value={celular}
-                        onChange={(e) => setCelular(e.target.value)}
+                        type="date"
                         className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-gray-700 mb-1">Correo electrónico</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={fechaNacimiento}
+                        onChange={e => setFechaNacimiento(e.target.value)}
                         required
-                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
                     />
                 </div>
+
+                <select
+                    className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    value={nacionalidad}
+                    onChange={e => setNacionalidad(e.target.value)}
+                    required
+                >
+                    <option value="">Seleccione nacionalidad</option>
+                    {nacionalidades.map(n => <option key={n}>{n}</option>)}
+                </select>
+
+                {nacionalidad === "Otro" && (
+                    <input
+                        className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                        placeholder="Especifique nacionalidad"
+                        value={otraNacionalidad}
+                        onChange={e => setOtraNacionalidad(e.target.value)}
+                        required
+                    />
+                )}
+
+                <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    placeholder="Dirección" value={direccion} onChange={e => setDireccion(e.target.value)} />
+
+                <select
+                    className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    value={curso}
+                    onChange={e => setCurso(e.target.value)}
+                    required
+                >
+                    <option value="">Seleccione curso</option>
+                    {cursos.map(c => <option key={c}>{c}</option>)}
+                </select>
+
+                <input
+                    className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    placeholder="Celular"
+                    value={celular}
+                    onChange={e => {
+                        const v = e.target.value.replace(/\D/g, "");
+                        if (v.length <= 10) setCelular(v);
+                    }}
+                />
+
+                <input
+                    type="email"
+                    className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                />
 
                 <button
-                    type="submit"
-                    className="bg-blue-900 text-white px-6 py-2 rounded font-semibold hover:bg-blue-800 transition"
                     disabled={loading}
+                    className="bg-blue-900 text-white px-6 py-2 rounded font-semibold hover:bg-blue-800 transition"
                 >
                     {loading ? <Loader /> : "Registrar"}
                 </button>

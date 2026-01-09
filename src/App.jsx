@@ -25,7 +25,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AdminLayout from "./layout/AdminLayout.jsx";
 import DocenteLayout from "./layout/DocenteLayout.jsx";
 import EstudianteLayout from "./layout/EstudianteLayout.jsx";
-import VerCalificaciones from "./pages/VerCalificaciones.jsx";
+import Calificaciones from "./pages/Calificaciones.jsx";
 
 function App() {
   return (
@@ -78,7 +78,7 @@ function App() {
           }
         >
           <Route index element={<EstudianteDashboard />} />
-          <Route path="ver-calificaciones/:id" element={<VerCalificaciones />} />
+          <Route path="mis-calificaciones" element={<Calificaciones />} />
         </Route>
       </Routes>
 
