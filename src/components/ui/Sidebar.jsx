@@ -13,7 +13,6 @@ export default function Sidebar() {
             { name: "Dashboard", path: "/admin" },
             { name: "Registrar Docente", path: "/admin/registrar-docente" },
             { name: "Registrar Estudiante", path: "/admin/registrar-estudiante" },
-            { name: "Actualizar Contraseña", path: "/admin/actualizar-password" }
         );
     }
 

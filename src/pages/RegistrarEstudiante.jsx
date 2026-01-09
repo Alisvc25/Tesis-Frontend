@@ -15,6 +15,7 @@ export default function RegistrarEstudiante() {
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [nacionalidad, setNacionalidad] = useState("");
     const [otraNacionalidad, setOtraNacionalidad] = useState("");
+    const [cultura, setCultura] = useState("");
     const [direccion, setDireccion] = useState("");
     const [curso, setCurso] = useState("");
     const [celular, setCelular] = useState("");
@@ -40,6 +41,7 @@ export default function RegistrarEstudiante() {
                 cedula,
                 fechaNacimiento,
                 nacionalidad: nacionalidad === "Otro" ? otraNacionalidad : nacionalidad,
+                cultura,
                 direccion,
                 curso,
                 celular,
@@ -53,6 +55,7 @@ export default function RegistrarEstudiante() {
             setFechaNacimiento("");
             setNacionalidad("");
             setOtraNacionalidad("");
+            setCultura("");
             setDireccion("");
             setCurso("");
             setCelular("");
@@ -124,6 +127,9 @@ export default function RegistrarEstudiante() {
                 <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
                     placeholder="Dirección" value={direccion} onChange={e => setDireccion(e.target.value)} />
 
+                <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
+                    placeholder="Cultura" value={cultura} onChange={e => setCultura(e.target.value)} /> 
+                    
                 <select
                     className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
                     value={curso}
