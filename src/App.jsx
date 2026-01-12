@@ -28,9 +28,9 @@ import ActualizarDocente from "./pages/ActualizarDocente.jsx";
 import VisualizarDocente from "./pages/VisualizarDocente.jsx";
 
 import RegistrarEstudiante from "./pages/RegistrarEstudiante.jsx";
-import ListarEstudiante from "./pages/ListarEstudiantes.jsx";
+import ListarEstudiante from "./pages/ListarEstudiante.jsx";
 import ActualizarEstudiante from "./pages/ActualizarEstudiante.jsx";
-import VisualizarEstudiante from "./pages/VisualizarEstudiantes.jsx";
+import VisualizarEstudiante from "./pages/VisualizarEstudiante.jsx";
 
 import CrearCalificacion from "./pages/CrearCalificacion.jsx";
 import ListarCalificaciones from "./pages/ListarCalificaciones.jsx";
