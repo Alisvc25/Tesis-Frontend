@@ -27,7 +27,7 @@ export const adminApi = {
     },
 
     visualizarDocente: async (id, token) => {
-        const res = await axios.get(`${API_URL}/administrador/visualizarDocente/${id}`, {
+        const res = await axios.get(`${API_URL}/administrador/visualizarDocentes/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return res.data;
@@ -60,7 +60,7 @@ export const adminApi = {
     },
 
     visualizarEstudiante: async (id, token) => {
-        const res = await axios.get(`${API_URL}/administrador/visualizarEstudiante/${id}`, {
+        const res = await axios.get(`${API_URL}/administrador/visualizarEstudiantes/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return res.data;
