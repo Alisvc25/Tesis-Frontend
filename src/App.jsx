@@ -21,12 +21,12 @@ import NuevoPassword from "./pages/NuevoPassword.jsx";
 import RegistrarDocente from "./pages/RegistrarDocente.jsx";
 import ListarDocente from "./pages/ListarDocente.jsx";
 import ActualizarDocente from "./pages/ActualizarDocente.jsx";
-import VerDocente from "./pages/VerDocente.jsx";
+import VisualizarDocente from "./pages/VisualizarDocente.jsx";
 
 import RegistrarEstudiante from "./pages/RegistrarEstudiante.jsx";
 import ListarEstudiantes from "./pages/ListarEstudiantes.jsx";
-import ActualizarEstudiante from "./pages/ActualizarEstudiante.jsx";
-import VerEstudiante from "./pages/VerEstudiante.jsx";
+import ActualizarEstudiantes from "./pages/ActualizarEstudiante.jsx";
+import VisualizarEstudiantes from "./pages/VisualizarEstudiantes.jsx";
 
 import CrearCalificacion from "./pages/CrearCalificacion.jsx";
 import ListarCalificaciones from "./pages/ListarCalificaciones.jsx";
@@ -70,14 +70,12 @@ function App() {
           <Route path="registrar-docente" element={<RegistrarDocente />} />
           <Route path="listar-docentes" element={<ListarDocente />} />
           <Route path="actualizar-docente/:id" element={<ActualizarDocente />} />
-          <Route path="ver-docente/:id" element={<VerDocente />} />
+          <Route path="visualizar-docente/:id" element={<VisualizarDocente />} />
 
           <Route path="registrar-estudiante" element={<RegistrarEstudiante />} />
           <Route path="listar-estudiantes" element={<ListarEstudiantes />} />
-          <Route path="actualizar-estudiante/:id" element={<ActualizarEstudiante />} />
-          <Route path="ver-estudiante/:id" element={<VerEstudiante />} />
-
-
+          <Route path="actualizar-estudiante/:id" element={<ActualizarEstudiantes />} />
+          <Route path="visualizar-estudiante/:id" element={<VisualizarEstudiantes />} />
         </Route>
 
         <Route
