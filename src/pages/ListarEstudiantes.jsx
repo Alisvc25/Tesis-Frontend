@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { adminApi } from "../../api/adminApi";
 import { useNavigate } from "react-router-dom";
 
-export default function ListarEstudiante() {
+export default function ListarEstudiantes() {
     const [estudiantes, setEstudiantes] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");

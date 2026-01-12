@@ -53,7 +53,7 @@ export const adminApi = {
     },
 
     listarEstudiante: async (token) => {
-        const res = await axios.get(`${API_URL}/administrador/listarEstudiante`, {
+        const res = await axios.get(`${API_URL}/administrador/listarEstudiantes`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return res.data;
