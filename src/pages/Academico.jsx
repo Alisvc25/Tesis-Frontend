@@ -11,7 +11,6 @@ return (
         desde Educación Inicial hasta Tercero de Bachillerato.
     </p>
 
-    {/* EDUCACIÓN INICIAL */}
     <section className="mb-6">
         <h2 className="text-2xl font-semibold text-blue-800 mb-2">
             Educación Inicial
@@ -29,7 +28,6 @@ return (
         </ul>
     </section>
 
-    {/* EDUCACIÓN GENERAL BÁSICA */}
     <section className="mb-6">
         <h2 className="text-2xl font-semibold text-blue-800 mb-2">
             Educación General Básica
@@ -50,7 +48,6 @@ return (
         </ul>
     </section>
 
-    {/* BACHILLERATO */}
     <section className="mb-6">
         <h2 className="text-2xl font-semibold text-blue-800 mb-2">
             Bachillerato General Unificado
@@ -71,7 +68,6 @@ return (
         </ul>
     </section>
 
-    {/* CIERRE */}
     <div className="mt-8 p-4 bg-blue-50 border-l-4 border-blue-900 rounded">
         <p className="text-blue-900 font-medium">
             Nuestro compromiso es formar estudiantes íntegros, críticos y orgullosos de su identidad,
