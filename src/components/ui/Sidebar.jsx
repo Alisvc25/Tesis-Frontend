@@ -19,6 +19,7 @@ export default function Sidebar() {
     if (user.role === "docente") {
         links.push(
             { name: "Dashboard", path: "/docente" },
+            { name: "Perfil", path: "/docente/perfil" },
             { name: "Crear Calificación", path: "/docente/crear-calificacion" },
             { name: "Listar Calificaciones", path: "/docente/listar-calificaciones" }
         );
@@ -27,7 +28,9 @@ export default function Sidebar() {
     if (user.role === "estudiante") {
         links.push(
             { name: "Dashboard", path: "/estudiante" },
+            { name: "Perfil", path: "/estudiante/perfil" },
             { name: "Mis Calificaciones", path: "/estudiante/mis-calificaciones" },
+            
         );
     }
 

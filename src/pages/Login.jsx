@@ -103,9 +103,7 @@ export default function Login() {
 
                 <div className="mt-4 text-center">
                     {(roleParam === "administrador" || roleParam === "docente") && (
-                        <Link to="/recuperar-password" className="text-blue-900 hover:underline">
-                            ¿Olvidaste tu contraseña?
-                        </Link>
+                        <Link to="/recuperar-password" className="text-blue-900 hover:underline">¿Olvidaste tu contraseña?</Link>
                     )}
                 </div>
 

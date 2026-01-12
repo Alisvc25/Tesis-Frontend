@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { adminApi } from "../../api/adminApi";
+import { adminApi } from "../api/adminApi";
 import { useNavigate } from "react-router-dom";
 
 
-export default function ListarDocentes() {
+export default function ListarDocente() {
     const [docentes, setDocentes] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
 
     useEffect(() => {
-        adminApi.listarDocentes(token).then(setDocentes);
+        adminApi.listarDocente(token).then(setDocentes);
     }, []);
 
 
     const eliminar = async (id) => {
-        if (confirm("¿Eliminar docente?")) {
+        if (confirm("¿Desea eliminar el docente?")) {
             await adminApi.eliminarDocente(id, token);
             setDocentes(docentes.filter(d => d._id !== id));
         }

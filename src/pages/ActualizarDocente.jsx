@@ -2,25 +2,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { adminApi } from "../../api/adminApi";
 
-
 export default function ActualizarDocente() {
     const { id } = useParams();
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const [form, setForm] = useState({ nombre: "", email: "" });
 
-
     useEffect(() => {
         adminApi.visualizarDocente(id, token).then(d => setForm(d));
     }, []);
-
 
     const submit = async (e) => {
         e.preventDefault();
         await adminApi.actualizarDocente(id, form, token);
         navigate("/admin/docentes");
     };
-
 
     return (
         <form onSubmit={submit} className="p-6 space-y-4">

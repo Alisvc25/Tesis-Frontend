@@ -1,5 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
+import AdminLayout from "./layout/AdminLayout.jsx";
+import DocenteLayout from "./layout/DocenteLayout.jsx";
+import EstudianteLayout from "./layout/EstudianteLayout.jsx";
+
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Informacion from "./pages/Informacion.jsx";
@@ -30,13 +34,10 @@ import VisualizarEstudiantes from "./pages/VisualizarEstudiantes.jsx";
 
 import CrearCalificacion from "./pages/CrearCalificacion.jsx";
 import ListarCalificaciones from "./pages/ListarCalificaciones.jsx";
-import Perfil from "./pages/Perfil.jsx";
+import PerfilDocente from "./pages/PerfilDocente.jsx";
 
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-import AdminLayout from "./layout/AdminLayout.jsx";
-import DocenteLayout from "./layout/DocenteLayout.jsx";
-import EstudianteLayout from "./layout/EstudianteLayout.jsx";
 import Calificaciones from "./pages/Calificaciones.jsx";
 
 function App() {
@@ -87,7 +88,7 @@ function App() {
           }
         >
           <Route index element={<DocenteDashboard />} />
-          <Route path="perfil" element={<Perfil />} />
+          <Route path="perfil" element={<PerfilDocente />} />
           <Route path="crear-calificacion" element={<CrearCalificacion />} />
           <Route path="listar-calificaciones" element={<ListarCalificaciones />} />
         </Route>

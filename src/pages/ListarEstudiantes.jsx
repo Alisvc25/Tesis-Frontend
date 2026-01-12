@@ -2,25 +2,21 @@ import { useEffect, useState } from "react";
 import { adminApi } from "../../api/adminApi";
 import { useNavigate } from "react-router-dom";
 
-
-export default function ListarEstudiantes() {
+export default function ListarEstudiante() {
     const [estudiantes, setEstudiantes] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
-
     useEffect(() => {
-        adminApi.listarEstudiantes(token).then(setEstudiantes);
+        adminApi.listarEstudiante(token).then(setEstudiantes);
     }, []);
 
-
     const eliminar = async (id) => {
-        if (confirm("¿Eliminar estudiante?")) {
+        if (confirm("¿Desea eliminar el estudiante?")) {
             await adminApi.eliminarEstudiante(id, token);
             setEstudiantes(estudiantes.filter(d => d._id !== id));
         }
     };
-
 
     return (
         <div className="p-6">
