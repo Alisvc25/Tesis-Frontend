@@ -10,6 +10,7 @@ import Footer from "./components/ui/Footer.jsx";
 import PoliticaTerminos from "./pages/PoliticaTerminos.jsx";
 import Noticias from "./pages/NoticiasEventos.jsx";
 import Nosotros from "./pages/Nosotros.jsx";
+import Academico from "./pages/Academico.jsx";
 
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import DocenteDashboard from "./pages/DocenteDashboard.jsx";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/terminos" element={<PoliticaTerminos />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/sobre-nosotros" element={<Nosotros />} />
+        <Route path="/academico" element={<Academico />} />
         <Route path="/registro" element={<RegistrarAdmin />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 

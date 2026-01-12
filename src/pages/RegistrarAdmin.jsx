@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { adminApi } from "../api/adminApi.js";
 import Loader from "../components/ui/Loader.jsx";
 import ErrorAlert from "../components/ui/ErrorAlert.jsx";
@@ -14,6 +15,8 @@ export default function RegistrarAdmin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -109,26 +112,40 @@ export default function RegistrarAdmin() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div>
+                        <div className="relative">
                             <label className="form-label">Contraseña</label>
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="form-input"
+                                className="form-input pr-10"
                             />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label className="form-label">Confirmar Contraseña</label>
                             <input
-                                type="password"
+                                type={showConfirmPassword ? "text" : "password"}
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
-                                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-900"
+                                className="form-input pr-10"
                             />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            >
+                                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
                         </div>
                     </div>
 

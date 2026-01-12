@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import useAuth from "../context/useAuth.jsx";
 import Loader from "../components/ui/Loader.jsx";
@@ -13,6 +14,7 @@ export default function Login() {
     const roleParam = params.get("role") || null; // 'administrador' | 'docente' | 'estudiante'
 
     const [email, setEmail] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -69,15 +71,22 @@ export default function Login() {
                         />
                     </div>
 
-                    <div>
+                    <div className="relative">
                         <label className="form-label">Contraseña</label>
                         <input
-                            type="password"
-                            className="form-input"
+                            type={showPassword ? "text" : "password"}
+                            className="form-input pr-10"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                        <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
                     </div>
 
                     <button
@@ -93,6 +102,13 @@ export default function Login() {
                         <Link to="/registro" className="text-sm text-blue-900 hover:underline">Registrarse</Link>
                     )}
                 </div>
+
+                {(roleParam === "administrador" || roleParam === "docente") && (
+                    <Link to="/recuperar-password" className="text-blue-900 hover:underline">
+                        ¿Olvidaste tu contraseña?
+                    </Link>
+                )}
+
 
             </div>
         </div>

@@ -19,7 +19,7 @@ export default function Footer() {
                     <h4 className="font-semibold mb-3">Enlaces Rápidos</h4>
                     <ul className="text-sm text-blue-100 space-y-2">
                         <li><Link to="/sobre-nosotros" className="hover:underline">Sobre Nosotros</Link></li>
-                        <li><Link to="/programas" className="hover:underline">Programas Académicos</Link></li>
+                        <li><Link to="/academico" className="hover:underline">Programas Académicos</Link></li>
                         <li><Link to="/noticias" className="hover:underline">Noticias y Eventos</Link></li>
                     </ul>
                 </div>
