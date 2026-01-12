@@ -19,7 +19,7 @@ import RecuperarPassword from "./pages/RecuperarPassword.jsx";
 import NuevoPassword from "./pages/NuevoPassword.jsx";
 
 import RegistrarDocente from "./pages/RegistrarDocente.jsx";
-import ListarDocentes from "./pages/ListarDocentes.jsx";
+import ListarDocente from "./pages/ListarDocente.jsx";
 import ActualizarDocente from "./pages/ActualizarDocente.jsx";
 import VerDocente from "./pages/VerDocente.jsx";
 
@@ -68,7 +68,7 @@ function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="registrar-docente" element={<RegistrarDocente />} />
-          <Route path="listar-docentes" element={<ListarDocentes />} />
+          <Route path="listar-docentes" element={<ListarDocente />} />
           <Route path="actualizar-docente/:id" element={<ActualizarDocente />} />
           <Route path="ver-docente/:id" element={<VerDocente />} />
 
