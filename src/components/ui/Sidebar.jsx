@@ -12,7 +12,13 @@ export default function Sidebar() {
         links.push(
             { name: "Dashboard", path: "/admin" },
             { name: "Registrar Docente", path: "/admin/registrar-docente" },
+            { name: "Listar Docentes", path: "/admin/listar-docentes" },
+            { name: "Actualizar Docente", path: "/admin/actualizar-docente/:id" },
+            { name: "Visualizar Docente", path: "/admin/visualizar-docente/:id" },
             { name: "Registrar Estudiante", path: "/admin/registrar-estudiante" },
+            { name: "Listar Estudiantes", path: "/admin/listar-estudiante" },
+            { name: "Actualizar Estudiante", path: "/admin/actualizar-estudiante/:id" },
+            { name: "Visualizar Estudiante", path: "/admin/visualizar-estudiante/:id" }
         );
     }
 
@@ -28,9 +34,8 @@ export default function Sidebar() {
     if (user.role === "estudiante") {
         links.push(
             { name: "Dashboard", path: "/estudiante" },
-            { name: "Perfil", path: "/estudiante/perfil" },
             { name: "Mis Calificaciones", path: "/estudiante/mis-calificaciones" },
-            
+
         );
     }
 
