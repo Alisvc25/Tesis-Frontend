@@ -6,7 +6,6 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Cargar token desde localStorage
     useEffect(() => {
         const savedUser = localStorage.getItem("userData");
         if (savedUser) {
@@ -15,7 +14,6 @@ export function AuthProvider({ children }) {
         setLoading(false);
     }, []);
 
-    // ------------------ LOGIN ------------------
     const login = async (email, password) => {
         try {
             const res = await axios.post("http://localhost:4000/api/auth/login", {
@@ -39,7 +37,6 @@ export function AuthProvider({ children }) {
         }
     };
 
-    // ------------------ LOGOUT ------------------
     const logout = () => {
         localStorage.removeItem("userData");
         setUser(null);

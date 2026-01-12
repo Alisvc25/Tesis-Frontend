@@ -11,7 +11,7 @@ export default function Login() {
     const navigate = useNavigate();
     const location = useLocation();
     const params = new URLSearchParams(location.search);
-    const roleParam = params.get("role") || null; // 'administrador' | 'docente' | 'estudiante'
+    const roleParam = params.get("role") || null;
 
     const [email, setEmail] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +27,6 @@ export default function Login() {
         setError("");
 
         try {
-            // Elegir endpoint según el role seleccionado (o por defecto administrador)
             let endpoint = "/administrador/login";
             if (roleParam === "docente") endpoint = "/apiD/login";
             else if (roleParam === "estudiante") endpoint = "/apiE/login";
@@ -35,10 +34,8 @@ export default function Login() {
             const res = await axios.post(`${API_URL}${endpoint}`, { email, password });
 
             const userData = res.data;
-            // Guardar usuario y token en contexto
             login(userData, res.data.token);
 
-            // Redirigir según rol que devuelve el backend (campo 'rol')
             const rolBackend = userData.rol || userData.role || null;
             if (rolBackend === "administrador") navigate("/admin");
             else if (rolBackend === "docente") navigate("/docente");
@@ -103,12 +100,14 @@ export default function Login() {
                     )}
                 </div>
 
-                {(roleParam === "administrador" || roleParam === "docente") && (
-                    <Link to="/recuperar-password" className="text-blue-900 hover:underline">
-                        ¿Olvidaste tu contraseña?
-                    </Link>
-                )}
 
+                <div className="mt-4 text-center">
+                    {(roleParam === "administrador" || roleParam === "docente") && (
+                        <Link to="/recuperar-password" className="text-blue-900 hover:underline">
+                            ¿Olvidaste tu contraseña?
+                        </Link>
+                    )}
+                </div>
 
             </div>
         </div>
