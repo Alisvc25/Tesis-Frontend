@@ -15,7 +15,7 @@ export default function ActualizarEstudiante() {
     const submit = async (e) => {
         e.preventDefault();
         await adminApi.actualizarEstudiante(id, form, token);
-        navigate("/admin/estudiantes");
+        navigate("/admin/estudiante");
     };
 
     return (
