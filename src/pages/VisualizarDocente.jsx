@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { adminApi } from "../../api/adminApi";
 
 
-export default function VerDocente() {
+export default function VisualizarDocente() {
     const { id } = useParams();
     const [docente, setDocente] = useState(null);
     const token = localStorage.getItem("token");
