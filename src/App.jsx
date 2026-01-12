@@ -15,11 +15,22 @@ import Academico from "./pages/Academico.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import DocenteDashboard from "./pages/DocenteDashboard.jsx";
 import EstudianteDashboard from "./pages/EstudianteDashboard.jsx";
+import RecuperarPassword from "./pages/RecuperarPassword.jsx";
+import NuevoPassword from "./pages/NuevoPassword.jsx";
+
 import RegistrarDocente from "./pages/RegistrarDocente.jsx";
+import ListarDocentes from "./pages/ListarDocentes.jsx";
+import ActualizarDocente from "./pages/ActualizarDocente.jsx";
+import VerDocente from "./pages/VerDocente.jsx";
+
 import RegistrarEstudiante from "./pages/RegistrarEstudiante.jsx";
+import ListarEstudiantes from "./pages/ListarEstudiantes.jsx";
+import ActualizarEstudiante from "./pages/ActualizarEstudiante.jsx";
+import VerEstudiante from "./pages/VerEstudiante.jsx";
 
 import CrearCalificacion from "./pages/CrearCalificacion.jsx";
 import ListarCalificaciones from "./pages/ListarCalificaciones.jsx";
+import Perfil from "./pages/Perfil.jsx";
 
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
@@ -44,6 +55,8 @@ function App() {
         <Route path="/academico" element={<Academico />} />
         <Route path="/registro" element={<RegistrarAdmin />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/recuperar-password" element={<RecuperarPassword />} />
+        <Route path="/recuperar-password/:token" element={<NuevoPassword />} />
 
         <Route
           path="/admin/*"
@@ -55,7 +68,16 @@ function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="registrar-docente" element={<RegistrarDocente />} />
+          <Route path="listar-docentes" element={<ListarDocentes />} />
+          <Route path="actualizar-docente/:id" element={<ActualizarDocente />} />
+          <Route path="ver-docente/:id" element={<VerDocente />} />
+
           <Route path="registrar-estudiante" element={<RegistrarEstudiante />} />
+          <Route path="listar-estudiantes" element={<ListarEstudiantes />} />
+          <Route path="actualizar-estudiante/:id" element={<ActualizarEstudiante />} />
+          <Route path="ver-estudiante/:id" element={<VerEstudiante />} />
+
+
         </Route>
 
         <Route
@@ -67,6 +89,7 @@ function App() {
           }
         >
           <Route index element={<DocenteDashboard />} />
+          <Route path="perfil" element={<Perfil />} />
           <Route path="crear-calificacion" element={<CrearCalificacion />} />
           <Route path="listar-calificaciones" element={<ListarCalificaciones />} />
         </Route>
