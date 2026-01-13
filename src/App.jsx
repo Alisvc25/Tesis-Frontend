@@ -23,7 +23,7 @@ import RecuperarPassword from "./pages/RecuperarPassword.jsx";
 import NuevoPassword from "./pages/NuevoPassword.jsx";
 
 import RegistrarDocente from "./pages/RegistrarDocente.jsx";
-import ListarDocente from "./pages/ListarDocente.jsx";
+import ListarDocente from "./pages/ListarDocentes.jsx";
 import ActualizarDocente from "./pages/ActualizarDocente.jsx";
 import VisualizarDocente from "./pages/VisualizarDocente.jsx";
 

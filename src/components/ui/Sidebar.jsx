@@ -13,12 +13,12 @@ export default function Sidebar() {
             { name: "Dashboard", path: "/admin" },
             { name: "Registrar Docente", path: "/admin/registrar-docente" },
             { name: "Listar Docentes", path: "/admin/listar-docentes" },
-            { name: "Actualizar Docente", path: "/admin/actualizar-docente/:id" },
-            { name: "Visualizar Docente", path: "/admin/visualizar-docente/:id" },
+            { name: "Actualizar Docente", path: "/admin/actualizar-docente" },
+            { name: "Visualizar Docente", path: "/admin/visualizar-docente" },
             { name: "Registrar Estudiante", path: "/admin/registrar-estudiante" },
             { name: "Listar Estudiantes", path: "/admin/listar-estudiante" },
-            { name: "Actualizar Estudiante", path: "/admin/actualizar-estudiante/:id" },
-            { name: "Visualizar Estudiante", path: "/admin/visualizar-estudiante/:id" }
+            { name: "Actualizar Estudiante", path: "/admin/actualizar-estudiante" },
+            { name: "Visualizar Estudiante", path: "/admin/visualizar-estudiante" }
         );
     }
 
