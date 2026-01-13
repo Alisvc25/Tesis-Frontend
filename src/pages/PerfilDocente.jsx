@@ -1,25 +1,15 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
+import { docenteApi } from "../api/docenteApi";
+import useAuth from "../context/useAuth";
 
 export default function Perfil() {
+    const { user } = useAuth();
     const [perfil, setPerfil] = useState(null);
 
     useEffect(() => {
-        const obtenerPerfil = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                const { data } = await axios.get("/docente/perfil", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setPerfil(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        obtenerPerfil();
+        docenteApi.obtenerPerfil(user.token)
+            .then(res => setPerfil(res))
+            .catch(() => alert("Error al cargar el perfil"));
     }, []);
 
     if (!perfil) return <p>Cargando perfil...</p>;

@@ -31,4 +31,12 @@ export const docenteApi = {
         return res.data;
     },
 
+    obtenerPerfil: async (token) => {
+        const res = await axios.get(`${API_URL}/perfil`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return res.data;
+    },
+    
+
 };
