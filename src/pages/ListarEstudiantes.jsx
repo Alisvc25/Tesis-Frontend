@@ -7,48 +7,24 @@ import ErrorAlert from "../components/ui/ErrorAlert.jsx";
 
 const EyeIcon = (props) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
-        <path
-            d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        />
-        <path
-            d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        />
+        <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
 
 const PencilIcon = (props) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
-        <path
-            d="M12 20h9"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-        />
-        <path
-            d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        />
+        <path d="M12 20h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
 
 const TrashIcon = (props) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
-        <path
-            d="M3 6h18"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-        />
-        <path
-            d="M8 6V4h8v2"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-        />
-        <path
-            d="M19 6l-1 14H6L5 6"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        />
-        <path
-            d="M10 11v6M14 11v6"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-        />
+        <path d="M3 6h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M8 6V4h8v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M19 6l-1 14H6L5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 11v6M14 11v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
 );
 
@@ -98,7 +74,7 @@ export default function ListarEstudiante() {
                     onClick={() => navigate("/admin/registrar-estudiante")}
                     className="bg-blue-900 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition"
                 >
-                    + Nuevo Estudiante
+                    + Nuevo
                 </button>
             </div>
 
@@ -117,43 +93,36 @@ export default function ListarEstudiante() {
                     <tbody>
                         {estudiantes.map((e) => (
                             <tr key={e._id} className="border-b hover:bg-gray-50 transition">
-                                <td className="py-3 px-4">
-                                    <div className="font-semibold text-blue-900">
-                                        {e.nombre} {e.apellido}
-                                    </div>
-                                    <div className="text-xs text-gray-500">
-                                        Cédula: {e.cedula || "—"} · Cel: {e.celular || "—"}
-                                    </div>
+                                <td className="py-3 px-4 font-semibold text-blue-900">
+                                    {e.nombre} {e.apellido}
                                 </td>
 
                                 <td className="py-3 px-4">{e.email}</td>
+
                                 <td className="py-3 px-4">
                                     <div className="flex justify-center gap-2">
                                         <button
                                             title="Ver"
                                             onClick={() => navigate(`/admin/visualizar-estudiante/${e._id}`)}
-                                            className="inline-flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700 transition"
+                                            className="p-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition"
                                         >
-                                            <EyeIcon className="w-5 h-5" />
-                                            <span className="hidden sm:inline">Ver</span>
+                                            <EyeIcon className="w-4 h-4" />
                                         </button>
 
                                         <button
                                             title="Editar"
                                             onClick={() => navigate(`/admin/actualizar-estudiante/${e._id}`)}
-                                            className="inline-flex items-center gap-2 bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-800 transition"
+                                            className="p-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition"
                                         >
-                                            <PencilIcon className="w-5 h-5" />
-                                            <span className="hidden sm:inline">Editar</span>
+                                            <PencilIcon className="w-4 h-4" />
                                         </button>
 
                                         <button
                                             title="Eliminar"
                                             onClick={() => handleDelete(e._id)}
-                                            className="inline-flex items-center gap-2 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition"
+                                            className="p-2 rounded bg-red-600 text-white hover:bg-red-700 transition"
                                         >
-                                            <TrashIcon className="w-5 h-5" />
-                                            <span className="hidden sm:inline">Eliminar</span>
+                                            <TrashIcon className="w-4 h-4" />
                                         </button>
                                     </div>
                                 </td>
