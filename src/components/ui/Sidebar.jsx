@@ -13,7 +13,7 @@ export default function Sidebar() {
             { name: "Dashboard", path: "/admin" },
             { name: "Registrar Docente", path: "/admin/registrar-docente" },
             { name: "Listar Docentes", path: "/admin/listar-docentes" },
-            { name: "Actualizar Docente", path: "/admin/actualizar-docente" },
+            { name: "Actualizar Docente", path: "/admin/registrar-docente" },
             { name: "Visualizar Docente", path: "/admin/visualizar-docente" },
             { name: "Registrar Estudiante", path: "/admin/registrar-estudiante" },
             { name: "Listar Estudiantes", path: "/admin/listar-estudiante" },
