@@ -2,8 +2,11 @@ import { useState } from "react";
 import { adminApi } from "../api/adminApi.js";
 import Loader from "../components/ui/Loader.jsx";
 import ErrorAlert from "../components/ui/ErrorAlert.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function RegistrarDocente() {
+    const { user } = useAuth();
+
     const materiasDisponibles = ["Matemáticas", "Lengua y Literatura", "Ciencias Naturales", "Historia", "Inglés", 
         "Educación Física", "Biología", "Química", "Física", "Estudios Sociales",
     "Ciudadania", "Educacion Artística"];
@@ -41,10 +44,19 @@ export default function RegistrarDocente() {
                 celular,
                 email,
                 materias
-            });
+            },
+            user.token
+        );
 
             setSuccess("Docente registrado correctamente");
-            setNombre(""); setApellido(""); setDireccion(""); setCedula(""); setCelular(""); setMaterias([]); setEmail("");
+            setNombre(""); 
+            setApellido(""); 
+            setDireccion(""); 
+            setCedula(""); 
+            setCelular("");
+            setMaterias([]); 
+            setEmail("");
+
         } catch (err) {
             setError(err.response?.data?.msg || "Error al registrar docente");
         } finally {

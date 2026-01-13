@@ -2,10 +2,14 @@ import { useState } from "react";
 import { adminApi } from "../api/adminApi.js";
 import Loader from "../components/ui/Loader.jsx";
 import ErrorAlert from "../components/ui/ErrorAlert.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function RegistrarEstudiante() {
+
+    const { user } = useAuth();
+
     const cursos = ["Inicial1", "Inicial2", "2do", "3ro", "4to",
-        "5to", "6to", "7mo", "8vo", "9no", "10mo", 
+        "5to", "6to", "7mo", "8vo", "9no", "10mo",
         "1ro BGU", "2do BGU", "3ro BGU"];
     const nacionalidades = ["Ecuatoriana", "Colombiana", "Venezolana", "Otro"];
 
@@ -46,7 +50,9 @@ export default function RegistrarEstudiante() {
                 curso,
                 celular,
                 email,
-            });
+            },
+                user.token
+            );
 
             setSuccess("Estudiante registrado correctamente");
             setNombre("");
@@ -60,6 +66,7 @@ export default function RegistrarEstudiante() {
             setCurso("");
             setCelular("");
             setEmail("");
+
         } catch (err) {
             setError(err.response?.data?.msg || "Error al registrar estudiante");
         } finally {
@@ -128,8 +135,8 @@ export default function RegistrarEstudiante() {
                     placeholder="Dirección" value={direccion} onChange={e => setDireccion(e.target.value)} />
 
                 <input className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
-                    placeholder="Cultura" value={cultura} onChange={e => setCultura(e.target.value)} /> 
-                    
+                    placeholder="Cultura" value={cultura} onChange={e => setCultura(e.target.value)} />
+
                 <select
                     className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900"
                     value={curso}
