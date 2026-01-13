@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios"; // tu config axios
+import axios from "../api/axios";
 
 export default function Perfil() {
     const [perfil, setPerfil] = useState(null);

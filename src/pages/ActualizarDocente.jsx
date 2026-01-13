@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { adminApi } from "../../api/adminApi";
+import { adminApi } from "../api/adminApi.js";
 
 export default function ActualizarDocente() {
     const { id } = useParams();

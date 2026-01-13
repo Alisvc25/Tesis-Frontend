@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { adminApi } from "../../api/adminApi";
+import { adminApi } from "../api/adminApi.js";
 import { useNavigate } from "react-router-dom";
 
 export default function ListarEstudiantes() {

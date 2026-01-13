@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { adminApi } from "../api/adminApi";
+import { adminApi } from "../api/adminApi.js";
 import { useNavigate } from "react-router-dom";
-
 
 export default function ListarDocente() {
     const [docentes, setDocentes] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
-
     useEffect(() => {
         adminApi.listarDocente(token).then(setDocentes);
     }, []);
-
 
     const eliminar = async (id) => {
         if (confirm("¿Desea eliminar el docente?")) {
@@ -20,7 +17,6 @@ export default function ListarDocente() {
             setDocentes(docentes.filter(d => d._id !== id));
         }
     };
-
 
     return (
         <div className="p-6">

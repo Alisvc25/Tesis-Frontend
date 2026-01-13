@@ -1,18 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { adminApi } from "../../api/adminApi";
-
+import { adminApi } from "../api/adminApi.js";
 
 export default function VisualizarDocente() {
     const { id } = useParams();
     const [docente, setDocente] = useState(null);
     const token = localStorage.getItem("token");
 
-
     useEffect(() => {
         adminApi.visualizarDocente(id, token).then(setDocente);
     }, []);
-
 
     if (!docente) return <p>Cargando...</p>;
 
