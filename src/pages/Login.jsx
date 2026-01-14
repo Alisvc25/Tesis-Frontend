@@ -34,12 +34,22 @@ export default function Login() {
             const res = await axios.post(`${API_URL}${endpoint}`, { email, password });
 
             const userData = res.data;
-            login(userData, res.data.token);
 
-            const rolBackend = userData.rol || userData.role || null;
-            if (rolBackend === "administrador") navigate("/admin");
-            else if (rolBackend === "docente") navigate("/docente");
-            else if (rolBackend === "estudiante") navigate("/estudiante");
+            const normalizedUser = {
+                ...userData,
+                role: userData.rol ?? userData.role ?? roleParam,
+            };
+
+            login(normalizedUser, normalizedUser.token);
+
+            if
+                (normalizedUser.role === "administrador") navigate("/admin");
+            else if
+                (normalizedUser.role === "docente") navigate("/docente");
+            else if
+                (normalizedUser.role === "estudiante") navigate("/estudiante");
+
+
         } catch (err) {
             setError(err.response?.data?.msg || "Error al iniciar sesión");
         } finally {
@@ -103,7 +113,9 @@ export default function Login() {
 
                 <div className="mt-4 text-center">
                     {(roleParam === "administrador" || roleParam === "docente") && (
-                        <Link to="/recuperar-password" className="text-blue-900 hover:underline">¿Olvidaste tu contraseña?</Link>
+                        <Link to={`/recuperar-password?role=${roleParam}`} className="text-blue-900 hover:underline">
+                            ¿Olvidaste tu contraseña?
+                        </Link>
                     )}
                 </div>
 
