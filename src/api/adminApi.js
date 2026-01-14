@@ -8,10 +8,18 @@ export const adminApi = {
         return res.data;
     },
 
-    actualizarPassword: async (id, data, token) => {
-        const res = await axios.put(`${API_URL}/administrador/actualizarpassword/${id}`, data, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+    recuperarPassword: async (email) => {
+        const res = await axios.post(`${API_URL}/administrador/recuperarPassword`, { email });
+        return res.data;
+    },
+
+    comprobarTokenPassword: async (token) => {
+        const res = await axios.get(`${API_URL}/administrador/recuperarPassword/${token}`);
+        return res.data;
+    },
+
+    nuevoPassword: async (token, data) => {
+        const res = await axios.post(`${API_URL}/administrador/recuperarPassword/${token}`, data);
         return res.data;
     },
 
