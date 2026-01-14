@@ -8,7 +8,6 @@ export function AuthProvider({ children }) {
         if (!saved) return null;
         try {
             const parsed = JSON.parse(saved);
-            // Normalize role field (backend may return 'rol')
             const normalized = { ...parsed, role: parsed.role || parsed.rol || null };
             return normalized;
         } catch {

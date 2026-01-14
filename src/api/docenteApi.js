@@ -4,17 +4,17 @@ const API_URL = import.meta.env.VITE_BACKEND_URL + "/apiD";
 
 export const docenteApi = {
     recuperarPassword: async (email) => {
-        const res = await axios.post(`${API_URL}/docente/recuperarPassword`, { email });
+        const res = await axios.post(`${API_URL}/docente/recuperarpassword`, { email });
         return res.data;
     },
 
     comprobarTokenPassword: async (token) => {
-        const res = await axios.get(`${API_URL}/docente/recuperarPassword/${token}`);
+        const res = await axios.get(`${API_URL}/docente/recuperarpassword/${token}`);
         return res.data;
     },
 
     nuevoPassword: async (token, data) => {
-        const res = await axios.post(`${API_URL}/docente/recuperarPassword/${token}`, data);
+        const res = await axios.post(`${API_URL}/docente/recuperarpassword/${token}`, data);
         return res.data;
     },
 

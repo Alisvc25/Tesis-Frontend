@@ -9,17 +9,17 @@ export const adminApi = {
     },
 
     recuperarPassword: async (email) => {
-        const res = await axios.post(`${API_URL}/administrador/recuperarPassword`, { email });
+        const res = await axios.post(`${API_URL}/administrador/recuperarpassword`, { email });
         return res.data;
     },
 
     comprobarTokenPassword: async (token) => {
-        const res = await axios.get(`${API_URL}/administrador/recuperarPassword/${token}`);
+        const res = await axios.get(`${API_URL}/administrador/recuperarpassword/${token}`);
         return res.data;
     },
 
     nuevoPassword: async (token, data) => {
-        const res = await axios.post(`${API_URL}/administrador/recuperarPassword/${token}`, data);
+        const res = await axios.post(`${API_URL}/administrador/recuperarpassword/${token}`, data);
         return res.data;
     },
 
