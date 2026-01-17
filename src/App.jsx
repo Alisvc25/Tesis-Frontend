@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout.jsx";
 import DocenteLayout from "./layout/DocenteLayout.jsx";
 import EstudianteLayout from "./layout/EstudianteLayout.jsx";
+import ConfirmarCuenta from "./pages/ConfirmarCuenta";
+
 
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -55,6 +57,7 @@ function App() {
         <Route path="/sobre-nosotros" element={<Nosotros />} />
         <Route path="/academico" element={<Academico />} />
         <Route path="/registro" element={<RegistrarAdmin />} />
+        <Route path="/confirm/:token" element={<ConfirmarCuenta />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/recuperar-password" element={<RecuperarPassword />} />
         <Route path="/recuperar-password/:token" element={<NuevoPassword />} />
