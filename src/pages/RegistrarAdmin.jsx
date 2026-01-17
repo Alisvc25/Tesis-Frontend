@@ -117,7 +117,7 @@ export default function RegistrarAdmin() {
                                     setCelular(e.target.value);
                                 }
                             }}
-                            placeholder="Ej: 0991234567"
+                            placeholder=""
                             className="form-input"
                         />
                     </div>
