@@ -31,15 +31,30 @@ export default function RegistrarAdmin() {
             return;
         }
 
+        if (celular && !/^\d{10}$/.test(celular)) {
+            setError("El número de celular debe tener exactamente 10 dígitos");
+            return;
+        }
+
         setLoading(true);
 
         try {
-            const payload = { nombre, apellido, direccion, celular, email, password };
+            const payload = {
+                nombre,
+                apellido,
+                direccion,
+                celular,
+                email,
+                password
+            };
+
             await adminApi.registrarAdmin(payload);
             setSuccess("Administrador registrado correctamente");
+
             setTimeout(() => {
                 navigate("/login?role=administrador");
             }, 1500);
+
         } catch (err) {
             setError(err.response?.data?.msg || "Error al registrar");
         } finally {
@@ -50,7 +65,9 @@ export default function RegistrarAdmin() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">Registro Administrador</h2>
+                <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
+                    Registro Administrador
+                </h2>
 
                 {error && <ErrorAlert message={error} />}
                 {success && <p className="text-green-600 mb-4 text-center">{success}</p>}
@@ -95,7 +112,12 @@ export default function RegistrarAdmin() {
                         <input
                             type="text"
                             value={celular}
-                            onChange={(e) => setCelular(e.target.value)}
+                            onChange={(e) => {
+                                if (/^\d*$/.test(e.target.value) && e.target.value.length <= 10) {
+                                    setCelular(e.target.value);
+                                }
+                            }}
+                            placeholder="Ej: 0991234567"
                             className="form-input"
                         />
                     </div>
@@ -160,7 +182,7 @@ export default function RegistrarAdmin() {
 
                 <div className="mt-4 text-center">
                     <p className="text-gray-600 text-sm">
-                        ¿Ya tienes cuenta?{' '}
+                        ¿Ya tienes cuenta?{" "}
                         <a href="/login" className="text-blue-900 hover:underline">
                             Iniciar sesión
                         </a>
