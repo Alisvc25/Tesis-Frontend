@@ -16,7 +16,7 @@ export default function ConfirmarCuenta() {
         const confirmarCuenta = async () => {
             try {
                 const res = await axios.get(
-                    `${API_URL}/confirm/${token}`
+                    `${API_URL}/administrador/confirmar/${token}`
                 );
                 setMensaje(res.data.msg || "Cuenta confirmada correctamente");
             } catch (err) {
