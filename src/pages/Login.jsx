@@ -104,12 +104,6 @@ export default function Login() {
                         {loading ? <Loader /> : "Iniciar Sesión"}
                     </button>
                 </form>
-                <div className="mt-4 text-center">
-                    {roleParam === "administrador" && (
-                        <Link to="/registro" className="text-sm text-blue-900 hover:underline">Registrarse</Link>
-                    )}
-                </div>
-
 
                 <div className="mt-4 text-center">
                     {(roleParam === "administrador" || roleParam === "docente") && (
