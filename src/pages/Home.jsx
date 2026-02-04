@@ -12,7 +12,7 @@ export default function Home() {
                 {/* Capa oscura para mejorar contraste */}
                 <div className="absolute inset-0 bg-black/40"></div>
 
-¿                <div className="relative z-10">
+                <div className="relative z-10">
                     <h1 className="text-4xl font-bold">
                         Unidad Educativa Intercultural Bilingüe
                     </h1>
