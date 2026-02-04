@@ -6,7 +6,7 @@ export default function Noticias() {
             fecha: "21 de Junio 2025",
             descripcion:
                 "La comunidad educativa realizó la tradicional celebración del Inti Raymi, honrando al sol y agradeciendo la energía que brinda vida y armonía. Estudiantes participaron en danzas, rituales simbólicos y presentaciones culturales.",
-            imagen: "/public/images/inti.jpg"
+            imagen: "/images/inti.jpg"
         },
         {
             id: 2,
@@ -14,7 +14,7 @@ export default function Noticias() {
             fecha: "1 de Marzo 2025",
             descripcion:
                 "La Unidad Educativa celebró el Pawkar Raymi, la fiesta del florecimiento, con actividades comunitarias, exposiciones artísticas y presentaciones que resaltan la cosmovisión indígena.",
-            imagen: "/public/images/pakar.jpg"
+            imagen: "/images/pakar.jpg"
         },
         {
             id: 3,
@@ -22,7 +22,7 @@ export default function Noticias() {
             fecha: "12 de Octubre 2025",
             descripcion:
                 "Estudiantes de todos los cursos compartieron muestras gastronómicas, artesanías, música ancestral y vestimenta tradicional en honor a la diversidad cultural.",
-            imagen: "/public/images/inter.jpg"
+            imagen: "/images/inter.jpg"
         },
         {
             id: 4,
@@ -30,7 +30,7 @@ export default function Noticias() {
             fecha: "5 de Septiembre 2025",
             descripcion:
                 "Se llevó a cabo la jornada académica institucional, con exposiciones sobre ciencias, matemáticas, cultura y tecnología preparadas por los estudiantes.",
-            imagen: "/public/images/jornada.jpg"
+            imagen: "/images/jornada.jpg"
         },
         {
             id: 5,
@@ -38,7 +38,7 @@ export default function Noticias() {
             fecha: "18 de Noviembre 2025",
             descripcion:
                 "Los estudiantes participaron en un taller especial sobre música y danza andina, aprendiendo la importancia espiritual y comunitaria de estas expresiones.",
-            imagen: "/public/images/danza.jpg"
+            imagen: "/images/danza.jpg"
         }
     ];
 
